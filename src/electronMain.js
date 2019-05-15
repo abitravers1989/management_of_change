@@ -1,4 +1,4 @@
-module.exports = ({ electron }) => ({
+module.exports = ({ electron, envVariables }) => ({
   start: () => {
     const { app, BrowserWindow } = electron;
     const createBrowserWindow = () => {
@@ -10,6 +10,10 @@ module.exports = ({ electron }) => ({
         },
       });
       browserWindow.loadFile('src/index.html');
+      if(envVariables.NODE_ENV !== 'production') {
+        // Open the DevTools.
+        browserWindow.webContents.openDevTools()
+      }
     }
     app.on('ready', createBrowserWindow);
   },

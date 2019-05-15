@@ -2,25 +2,25 @@ const { createContainer, asFunction, asValue } = require('awilix');
 
 // External Dependencies
 const electron = require('electron');
+const getenv = require('getenv');
 
 // Internal Files
 const electronMain = require('./electronMain');
 
 const container = createContainer();
 
-// let envVariables;
+let envVariables;
 
-// try {
-//   envVariables = getenv.multi({
-//     PORT: ['PORT', 3000],
-//     IMAGE_STORE_PATH: ['IMAGE_STORE_PATH'],
-//   });
-//   if (!envVariables.IMAGE_STORE_PATH) {
-//     throw new Error('Folder for image to be saved to must be provided');
-//   }
-// } catch (error) {
-//   winston.error(error, 'Error while loading environment variables');
-// }
+try {
+  envVariables = getenv.multi({
+    NODE_ENV: ['NODE_ENV', 'development'],
+  });
+  // if (!envVariables.IMAGE_STORE_PATH) {
+  //   throw new Error('Folder for image to be saved to must be provided');
+  // }
+} catch (error) {
+  winston.error(error, 'Error while loading environment variables');
+}
 
 // External Libraries
 container.register({
@@ -34,6 +34,7 @@ container.register({
 
 // Config
 container.register({
+  envVariables: asValue(envVariables),
 });
 
 // Utils

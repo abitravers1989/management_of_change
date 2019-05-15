@@ -1,17 +1,19 @@
 {
   "name": "desktop-application",
   "version": "1.0.0",
-  "description": "destop application using electron",
+  "description": "desktop application using electron",
   "main": "src/index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "dotenv electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "awilix": "^4.2.2",
+    "dotenv-cli": "^2.0.0",
     "electron": "^5.0.1",
+    "getenv": "^0.7.0",
     "nodemon": "^1.19.0"
   }
 }
